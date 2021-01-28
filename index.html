@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./base.css">
+    <link rel="stylesheet" href="./status-color.css">
+</head>
+
+<body>
+    <div class='container'>
+        <div class='upper-area'>
+            <div class='input-area'>
+                <img src="./BMICLogo.png">
+                <div>
+                    <div>身高 cm</div><input id="input-height" type="number" min="50" max="300" placeholder="請輸入身高">
+                    <div>體重 kg</div><input id="input-weight" type="number" min="5" max="1000" placeholder="請輸入體重">
+                </div>
+                <div class="btn btn-result">看結果</div>
+                <div class="btn input-result-area">
+                    <div class="btn-status-number"></div>
+                    <div class="icon-loop"><img src="./icons_loop.png"></div>
+                    <div class="btn-status-text"></div>
+                    <div class="btn"></div>
+                </div>
+            </div>
+        </div>
+        <div class="middle-area">
+            <h1>BMI 紀錄</h1>
+            <div id="record-list"></div>
+        </div>
+        <div class="bottom-area">
+            <img src="./BMICLogo-gray.png">
+        </div>
+    </div>
+    </div>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
+<script>
+    const databaseRef = 'bmi';
+    var bmiStatus;
+    var database;
+    var recordList = [];
+    initDataBase();
+    loadRecord();
+
+    function initDataBase() {
+        var firebaseConfig = {
+            apiKey: "AIzaSyBYfjBBcikUzqMj-hf7ZGz4In9PPwATBaw",
+            authDomain: "project-ab2e9.firebaseapp.com",
+            databaseURL: "https://project-ab2e9-default-rtdb.firebaseio.com",
+            projectId: "project-ab2e9",
+            storageBucket: "project-ab2e9.appspot.com",
+            messagingSenderId: "295049698987",
+            appId: "1:295049698987:web:26de26c58e5a350c1321ee"
+        };
+        firebase.initializeApp(firebaseConfig);
+        database = firebase.database();
+    }
+
+    $(".btn-result, .input-result-area").click(function() {
+        var height = $("#input-height").val();
+        var weight = $("#input-weight").val();
+
+        if (height && weight) {
+            $(".btn-result").hide();
+            $(".input-result-area").removeClass(`btn-${bmiStatus}`);
+            var bmiVal = (weight / Math.pow((height * 0.01), 2)).toFixed(2);
+            bmiStatus = checkBMIStatus(bmiVal);
+            $(".input-result-area").show();
+            $(".input-result-area").addClass(`btn-${bmiStatus}`);
+            $(".btn-status-number").html(`${bmiVal}<br><span>BMI</span>`);
+            writeData(height, weight, bmiVal, bmiStatus);
+        } else {
+            alert("請輸入身高體重!");
+        }
+    });
+
+    $(document).on('click', '.btn-delete', function() {
+        var id = $(this).data("id");
+        var todos = firebase.database().ref(databaseRef).child(id).remove();
+    });
+
+    function checkBMIStatus(val) {
+        if (val < 18.5) {
+            return "underweight";
+        } else if (val >= 18.5 && val < 24) {
+            return "ideal";
+        } else if (val >= 24 && val < 27) {
+            return "overweight";
+        } else if (val >= 27 && val < 30) {
+            return "mild-obesity";
+        } else if (val >= 30 && val < 35) {
+            return "moderate-obesity";
+        } else {
+            return "severe-obesity";
+        }
+    }
+
+    function writeData(height, weight, bmiVal, bmiStatus) {
+        var now = new Date($.now());
+        var createTime = `${paddingZero(now.getMonth()+1)}-${now.getDate()}-${now.getFullYear()}`;
+        var data = {
+            "height": height,
+            "weight": weight,
+            "bmi": bmiVal,
+            "status": bmiStatus,
+            "createTime": createTime
+        }
+        database.ref(databaseRef).push(data);
+    }
+
+    function paddingZero(n) {
+        return n < 10 ? '0' + n : n
+    }
+
+    function loadRecord() {
+        database.ref(databaseRef).on('value', function(snapshot) {
+            $('#record-list> .record-item').remove();
+            recordList = [];
+            snapshot.forEach(function(item) {
+                recordList.push({
+                    key: item.key,
+                    value: item.val()
+                })
+            })
+            recordList.reverse();
+            appendDataList(recordList);
+        })
+    }
+
+    function appendDataList(recordList) {
+        recordList.forEach(record => {
+            var recordVal = record.value;
+            var recordHtml = `
+            <div class="record-item">
+                <div class="status ${recordVal.status}">
+                    <div class="status-color"></div>
+                    <div class="status-text"></div>
+                </div>
+                <div class="record-item-bmi-data">
+                    <div><span>BMI</span>${recordVal.bmi}</div>
+                    <div><span>weight</span>${recordVal.weight}kg</div>
+                    <div><span>height</span>${recordVal.height}cm</div>
+                </div>
+                <span class="record-item-date">${recordVal.createTime}</span>
+                <div class="btn btn-delete" data-id='${record.key}'>刪除</div>
+            </div>`;
+            $('.middle-area>#record-list').append(recordHtml);
+        });
+    }
+</script>
+
+</html>

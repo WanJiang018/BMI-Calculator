@@ -70,32 +70,32 @@
     background-color: #FF1200;
 }
 
-.btn-ideal .btn-status-text:after,
+.btn-ideal .result-area-text:after,
 .ideal .status-text:after {
     content: "理想";
 }
 
-.btn-underweight .btn-status-text:after,
+.btn-underweight .result-area-text:after,
 .underweight .status-text:after {
     content: "過輕";
 }
 
-.btn-overweight .btn-status-text:after,
+.btn-overweight .result-area-text:after,
 .overweight .status-text:after {
     content: "過重";
 }
 
-.btn-mild-obesity .btn-status-text:after,
+.btn-mild-obesity .result-area-text:after,
 .mild-obesity .status-text:after {
     content: "輕度肥胖";
 }
 
-.btn-moderate-obesity .btn-status-text:after,
+.btn-moderate-obesity .result-area-text:after,
 .moderate-obesity .status-text:after {
     content: "中度肥胖";
 }
 
-.btn-severe-obesity .btn-status-text:after,
+.btn-severe-obesity .result-area-text:after,
 .severe-obesity .status-text:after {
     content: "重度肥胖";
 }

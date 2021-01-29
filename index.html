@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BMI-Calculator</title>
-    <link rel="stylesheet" href="./reset.css">
-    <link rel="stylesheet" href="./base.css">
-    <link rel="stylesheet" href="./status-color.css">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/status-color.css">
 </head>
 
 <body>
     <div class='upper-area'>
         <div class='container input-area'>
-            <img src="./BMICLogo.png">
+            <img src="./image/BMICLogo.png">
             <div>
                 <div>身高 cm</div><input id="input-height" type="number" min="50" max="300" placeholder="請輸入身高">
                 <div>體重 kg</div><input id="input-weight" type="number" min="5" max="1000" placeholder="請輸入體重">
@@ -21,7 +21,7 @@
             <div class="btn btn-result">看結果</div>
             <div class="btn btn-result-area">
                 <div class="result-area-bmi"></div>
-                <div class="btn icon-loop"><img src="./icons_loop.png"></div>
+                <div class="btn icon-loop"><img src="./image/icons_loop.png"></div>
                 <div class="result-area-text"></div>
             </div>
         </div>
@@ -33,13 +33,13 @@
         </div>
     </div>
     <div class="bottom-area">
-        <img src="./BMICLogo-gray.png">
+        <img src="./image/BMICLogo-gray.png">
     </div>
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
-<script src="./base.js"></script>
+<script src="./js/base.js"></script>
 
 </html>

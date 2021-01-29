@@ -1,0 +1,101 @@
+.btn-ideal {
+    border: 6px solid #86D73F;
+}
+
+.btn-underweight {
+    border: 6px solid #31BAF9;
+}
+
+.btn-overweight {
+    border: 6px solid #FF982D;
+}
+
+.btn-mild-obesity,
+.btn-moderate-obesity {
+    border: 6px solid #FF6C03;
+}
+
+.btn-severe-obesity {
+    border: 6px solid #FF1200;
+}
+
+.btn-ideal div {
+    color: #86D73F;
+}
+
+.btn-underweight div {
+    color: #31BAF9;
+}
+
+.btn-overweight div {
+    color: #FF982D;
+}
+
+.btn-mild-obesity div,
+.btn-moderate-obesity div {
+    color: #FF6C03;
+}
+
+.btn-severe-obesity div {
+    color: #FF1200;
+}
+
+.btn-ideal .icon-loop {
+    background-color: #86D73F;
+}
+
+.ideal .status-color {
+    background-color: #FFD366;
+}
+
+.btn-underweight .icon-loop,
+.underweight .status-color {
+    background-color: #31BAF9;
+}
+
+.btn-overweight .icon-loop,
+.overweight .status-color {
+    background-color: #FF982D;
+}
+
+.btn-mild-obesity .icon-loop,
+.btn-moderate-obesity .icon-loop,
+.mild-obesity .status-color,
+.moderate-obesity .status-color {
+    background-color: #FF6C03;
+}
+
+.btn-severe-obesity .icon-loop,
+.severe-obesity .status-color {
+    background-color: #FF1200;
+}
+
+.btn-ideal .result-area-text:after,
+.ideal .status-text:after {
+    content: "理想";
+}
+
+.btn-underweight .result-area-text:after,
+.underweight .status-text:after {
+    content: "過輕";
+}
+
+.btn-overweight .result-area-text:after,
+.overweight .status-text:after {
+    content: "過重";
+}
+
+.btn-mild-obesity .result-area-text:after,
+.mild-obesity .status-text:after {
+    content: "輕度肥胖";
+}
+
+.btn-moderate-obesity .result-area-text:after,
+.moderate-obesity .status-text:after {
+    content: "中度肥胖";
+}
+
+.btn-severe-obesity .result-area-text:after,
+.severe-obesity .status-text:after {
+    content: "重度肥胖";
+}
